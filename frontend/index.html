@@ -1,0 +1,130 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JS-frontend-demo">
+    <meta name="keywords" content="HTML, CSS, JavaScript, Demo">
+    <meta name="author" content="Thorsten Franz Brune">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vanilla js spa template</title>
+</head>
+
+<style>
+    body,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        user-select: none;
+    }
+    header,
+    footer {
+        height: 5%;
+        background-color: rgb(52, 52, 32);
+        font-size: 1.3vw;
+        color: rgb(76, 110, 64);
+    }
+    main {
+        height: 90%;
+        padding: 1%;
+        background: rgb(92, 92, 49);
+        font-size: 1.1vw;
+        color: #4C6E40;
+        box-sizing: border-box;
+    }
+    nav,
+    footer {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    }
+    nav p,
+    footer p {
+        cursor: pointer;
+    }
+    nav {
+        height: 100%;
+    }
+    .nLink {
+        margin-left: 1vw;
+    }
+    #nLeft,
+    #nMid,
+    #nRight p {
+        display: flex;
+    }
+    #nLeft {
+        width: 60%;
+    }
+    #nMid,
+    #nRight {
+        width: 20%;
+        display: flex;
+        justify-content: flex-end;
+    }
+    #nMid {
+        display: flex;
+        justify-content: center;
+        background: rgb(52, 52, 32)
+    }
+    #nRight {
+        margin-right: 1vw;
+    }
+    footer {
+        justify-content: space-between;
+    }
+    #fLeft {
+        width: 30%;
+    }
+    #fLeft_p {
+        margin-left: 1vw;
+    }
+    #fRight {
+        width: 25%;
+        display: flex;
+        justify-content: flex-end;
+    }
+    #fRight_p {
+        padding-right: 1vw;
+    }
+</style>
+
+<body>
+    <header>
+        <nav>
+            <div id="nLeft">
+                <p data-href="/home" class="nLink" id="home">Home</p>
+                <p data-href="/about" class="nLink" id="about">About</p>
+                <p data-href="/posts" class="nLink" id="posts">Posts</p>
+                <p data-href="/post/33" class="nLink" id="">Invalide route
+                    example</p>
+                <p data-href="/posts/33" class="nLink" id="">Params example</p>
+            </div>
+            <div id="nMid">
+                <p id="nUser" class="nLink" id="">Loading</p>
+            </div>
+            <div id="nRight">
+                <p id="nAuth">Login / Register</p>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div id="appMain"></div>
+    </main>
+
+    <footer>
+        <div id="fLeft">
+            <p id="fLeft_p" class="nLink">some footer content</p>
+        </div>
+        <div id="fRight">
+            <p id="fRight_p" class="nLink">some more footer content</p>
+        </div>
+    </footer>
+</body>
+
+</html>
