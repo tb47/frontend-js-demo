@@ -1,2 +1,1 @@
-"# frontend-js-demo" 
-"# frontend-js-demo" 
+Frontend JS demo by Thorsten Franz Brune
