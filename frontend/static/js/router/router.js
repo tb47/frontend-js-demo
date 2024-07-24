@@ -12,6 +12,9 @@ const getHtml = async () => {
         case "posts":
             a = await import(/* webpackChunkName: "posts" */`../components/posts/posts.js`);
             break;
+        case "shop":
+            a = await import(/* webpackChunkName: "shop" */`../components/shop/shop.js`);
+            break;
         default:
             a = await import(/* webpackChunkName: "404" */`../components/404/404.js`);
             break;
@@ -30,6 +33,9 @@ const getJs = async () => {
             break;
         case "posts":
             a = await import(/* webpackChunkName: "postsF" */`../components/posts/postsF.js`);
+            break;
+        case "about":
+            a = await import(/* webpackChunkName: "aboutF" */`../components/shop/shopF.js`);
             break;
         default:
             a = await import(/* webpackChunkName: "404F" */`../components/404/404F.js`);
