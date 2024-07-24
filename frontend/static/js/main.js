@@ -1,8 +1,7 @@
 import { router } from "./router/router.js";
 import { nav_footer_init } from "./nav_footer/nav_footer_init.js";
-import "./auth/authInit.js";
+import "./firebase/firebase_init.js";
 
-console.log("test");
 document.addEventListener("DOMContentLoaded", e => {
     // redirect the entry point of the page due to naming conventions and simplier routing 
     if (location.pathname.split("/")[1] === "") {

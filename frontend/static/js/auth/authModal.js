@@ -1,3 +1,16 @@
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { firebase_auth } from "../firebase/firebase_init";
+
+const fix_ui_after_login_logout = (user) => {
+    document.querySelector("#nAuth").style.color = "#4C6E40";
+    document.querySelector("#loginDiv4Email").value = "";
+    document.querySelector("#loginDiv4Password").value = "";
+    document.querySelector("#modalAuth").style.display = "none";
+    document.querySelector(`#${location.pathname.split("/")[1]}`).style.color = "#39e600";
+    document.querySelector("#nUser").innerHTML = user; 
+    document.querySelector("#nAuth").innerHTML = "Logout";
+};
+
 export default () => {
     document.querySelector(`#${location.pathname.split("/")[1]}`).style.color = "#4C6E40";
     document.querySelector("#nAuth").style.color = "#39e600";
@@ -17,13 +30,12 @@ export default () => {
                             </div>
                         <div id="loginDiv3" style="width: 100%; height: 20%;display: flex; flex-direction: row; justify-content: space-evenly">
                             <div style="width: 50%; text-align: center">
-                                <p id="loginDiv3LoginP" style="color: green; font-size: xx-large; text-decoration: underline; cursor: pointer;" data-active="1"
-                                   >
+                                <p id="loginDiv3LoginP" style="color: green; font-size: xx-large; text-decoration: underline; cursor: pointer">
                                     Login
                                 </p>
                             </div>
                             <div style="width: 50%; text-align: center">
-                                <p id="loginDiv3RegisterP" style="color: #822E0A; font-size: medium; cursor: pointer;" data-active="0">
+                                <p id="loginDiv3RegisterP" style="color: #822E0A; font-size: medium; cursor: pointer">
                                     Register
                                 </p>
                                 </div>
@@ -39,7 +51,7 @@ export default () => {
                             <input id="loginDiv4Password" type="password" name="password"></input> 
                         </div>
                         <div id="loginDiv5" 
-                        style="margin-bottom: 3%; color: white; cursor: pointer; border: 1px solid black; border-radius: 5px; padding: 0.5em 1em 0.5em 1em" onmouseover="this.style.backgroundColor='#30332D'; this.style.transition='0.65s'" onmouseout="this.style.backgroundColor=null; this.style.transition='0.65s'">
+                        style="margin-bottom: 3%; color: white; cursor: pointer; border: 1px solid black; border-radius: 5px; padding: 0.5em 1em 0.5em 1em" onmouseover="this.style.backgroundColor='#30332D'; this.style.transition='0.65s'" onmouseout="this.style.backgroundColor=null; this.style.transition='0.65s'" data-active="0">
                             <h4 id="loginDiv5LoginRegister">
                                 Login
                             </h4>
@@ -52,74 +64,96 @@ export default () => {
                 document.querySelector("#modalAuth").style.display = "none";
                 document.querySelector(`#${location.pathname.split("/")[1]}`).style.color = "#39e600";
             });
-            document.querySelector("#loginDiv5").addEventListener("click", () => {
-                // provider.sdk.auth.login(), ...
-                document.querySelector("#nAuth").style.color = "#4C6E40";
-                document.querySelector("#loginDiv4Email").value = "";
-                document.querySelector("#loginDiv4Password").value = "";
-                document.querySelector(`#${location.pathname.split("/")[1]}`).style.color = "#39e600";
+            const a = document.querySelector("#loginDiv5");
+            const b = document.querySelector("#loginDiv3LoginP");
+            const c = document.querySelector("#loginDiv3RegisterP");
+            b.addEventListener("click", () => {
+                if (a.dataset.active === "1") {
+                    a.dataset.active = "0";
+                    b.style.fontSize = "xx-large";
+                    b.style.color = "green";
+                    b.style.textDecoration = "underline";
+                    b.style.transition = "0.3s";
+                    c.style.fontSize = "medium";
+                    c.style.color = "#822E0A";
+                    c.style.textDecoration = "none";
+                };
             });
-            const a = document.querySelector("#loginDiv3LoginP");
-            const b = document.querySelector("#loginDiv3RegisterP");
-            a.addEventListener("click", () => {
-                if (a.dataset.active == 0) {
+            c.addEventListener("click", () => {
+                if (a.dataset.active === "0") {
                     a.dataset.active = "1";
-                    a.style.fontSize = "xx-large";
-                    a.style.color = "green";
-                    a.style.textDecoration = "underline";
-                    a.style.transition = "0.3s";
-                    b.dataset.active = "0";
+                    c.style.fontSize = "xx-large";
+                    c.style.color = "green";
+                    c.style.textDecoration = "underline";
+                    c.style.transition = "0.3s";
                     b.style.fontSize = "medium";
                     b.style.color = "#822E0A";
                     b.style.textDecoration = "none";
                 };
             });
-            b.addEventListener("click", () => {
-                if (b.dataset.active == 0) {
-                    b.dataset.active = "1";
-                    b.style.fontSize = "xx-large";
-                    b.style.color = "green";
-                    b.style.textDecoration = "underline";
-                    b.style.transition = "0.3s";
-                    a.dataset.active = "0";
-                    a.style.fontSize = "medium";
-                    a.style.color = "#822E0A";
-                    a.style.textDecoration = "none";
-                };
-            });
-            b.addEventListener("mouseover", e => {
-                if (e.target.dataset.active == 0) {
+            b.addEventListener("mouseover", () => {
+                if (a.dataset.active === "1") {
                     b.style.fontSize = "large";
                     b.style.color = "#FFB400";
                     b.style.transition = "1s";
                 };
             });
-            b.addEventListener("mouseout", e => {
-                if (e.target.dataset.active == 0) {
+            b.addEventListener("mouseout", () => {
+                if (a.dataset.active === "1") {
                     b.style.fontSize = "medium";
                     b.style.color = "#822E0A";
                     b.style.transition = "0s";
                 };
             });
-            a.addEventListener("mouseover", e => {
-                if (e.target.dataset.active == 0) {
-                    a.style.fontSize = "large";
-                    a.style.color = "#FFB400";
-                    a.style.transition = "1s";
+            c.addEventListener("mouseover", () => {
+                if (a.dataset.active === "0") {
+                    c.style.fontSize = "large";
+                    c.style.color = "#FFB400";
+                    c.style.transition = "1s";
                 };
             });
-            a.addEventListener("mouseout", e => {
-                if (e.target.dataset.active == 0) {
-                    a.style.fontSize = "medium";
-                    a.style.color = "#822E0A";
-                    a.style.transition = "0s";
+            c.addEventListener("mouseout", () => {
+                if (a.dataset.active === "0") {
+                    c.style.fontSize = "medium";
+                    c.style.color = "#822E0A";
+                    c.style.transition = "0s";
                 };
+            });
+            document.querySelector("#loginDiv5").addEventListener("click", () => {
+                // provider.sdk.auth.login(), ...
+                if (a.dataset.active === "0") {
+                    signInWithEmailAndPassword(firebase_auth, document.querySelector("#loginDiv4Email").value, document.querySelector("#loginDiv4Password").value)
+                        .then((userCredential) => {
+                            // Signed in 
+                            console.log(userCredential.user.email);
+                            fix_ui_after_login_logout(userCredential.user.email)
+                            // ...
+                        })
+                        .catch((error) => {
+                            console.log(error)
+                        });
+                } else {
+                    createUserWithEmailAndPassword(firebase_auth, document.querySelector("#loginDiv4Email").value, document.querySelector("#loginDiv4Password").value)
+                        .then((userCredential) => {
+                            // Signed up 
+                            console.log(userCredential.user);
+                            fix_ui_after_login_logout(userCredential.user.email)
+                            // ...
+                        })
+                        .catch((error) => {
+                            console.log(error)
+                            // ..
+                        });
+                }
             });
         } else {
             document.querySelector("#modalAuth").style.display = "flex";
         };
     } else {
         // provider.sdk.auth.logout() ...
+        firebase_auth.signOut();
         console.log("logout");
+        document.querySelector("#nAuth").innerHTML = "Login / Register";
+        document.querySelector("#nUser").innerHTML = "not logged in";
     };
 };
