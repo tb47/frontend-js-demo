@@ -1,7 +1,7 @@
 // router (paths for html & js files)
 // webpackChunkName is for code splitting reasons
 const getHtml = async () => {
-    let a = null;
+    let a;
     switch (location.pathname.split("/")[1]) {
         case "home":
             a = await import(/* webpackChunkName: "home" */`../components/home/home.js`);
@@ -20,7 +20,7 @@ const getHtml = async () => {
 };
 
 const getJs = async () => {
-    let a = null;
+    let a;
     switch (location.pathname.split("/")[1]) {
         case "home":
             a = await import(/* webpackChunkName: "homeF" */`../components/home/homeF.js`);
