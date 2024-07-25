@@ -34,8 +34,8 @@ const getJs = async () => {
         case "posts":
             a = await import(/* webpackChunkName: "postsF" */`../components/posts/postsF.js`);
             break;
-        case "about":
-            a = await import(/* webpackChunkName: "aboutF" */`../components/shop/shopF.js`);
+        case "shop":
+            a = await import(/* webpackChunkName: "shopF" */`../components/shop/shopF.js`);
             break;
         default:
             a = await import(/* webpackChunkName: "404F" */`../components/404/404F.js`);
